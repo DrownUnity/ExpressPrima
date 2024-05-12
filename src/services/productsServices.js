@@ -1,7 +1,10 @@
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
+
 export default class ProductService {
 
     constructor(){
-        this.product = [];
+        
     }
 
     async create(data) {
@@ -9,22 +12,32 @@ export default class ProductService {
     }
 
     async find(){
-        return []
+        return prisma.product.findMany()
     }
 
     async findOne(id){
-        return{ id };
+        return prisma.product.findUnique({
+            where: {
+                id: id
+            }
+        });
     }
 
     async update(id, changes){
-        return{
-            id,
-            changes
-        }
+        return prisma.product.update({
+            where: {
+                id
+            },
+            data: changes
+        })
     }
 
     async delete(id){
-        return {id}
+        return prisma.product.delete({
+            where: {
+                id
+            }
+        })
     }
 
 }
