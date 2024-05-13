@@ -8,15 +8,17 @@ export default class ProductService {
     }
 
     async create(data) {
-        return data
+        return await prisma.product.create({
+            data: data,
+        })
     }
 
     async find(){
-        return prisma.product.findMany()
+        return await prisma.product.findMany()
     }
 
     async findOne(id){
-        return prisma.product.findUnique({
+        return await prisma.product.findUnique({
             where: {
                 id: id
             }
@@ -24,7 +26,7 @@ export default class ProductService {
     }
 
     async update(id, changes){
-        return prisma.product.update({
+        return await prisma.product.update({
             where: {
                 id
             },
@@ -33,7 +35,7 @@ export default class ProductService {
     }
 
     async delete(id){
-        return prisma.product.delete({
+        return await prisma.product.delete({
             where: {
                 id
             }

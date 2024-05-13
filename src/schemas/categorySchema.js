@@ -6,7 +6,7 @@ const image = Joi.string().uri();
 
 export const createCategorySchema = Joi.object({
   name: name.required(),
-  image: image.required()
+  image: image
 });
 
 export const updateCategorySchema = Joi.object({

@@ -9,8 +9,8 @@ const category = Joi.string();
 export const createProductSchema = Joi.object({
     name: name.required(),
     price: price.required(),
-    image: image.required(),
-    category: category.required(),
+    image: image,
+    category: category,
 })
 
 export const updateProductSchema = Joi.object({
