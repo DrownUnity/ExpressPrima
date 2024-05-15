@@ -3,10 +3,6 @@ const prisma = new PrismaClient();
 
 export default class ProductService {
 
-    constructor(){
-        
-    }
-
     async create(data) {
         return await prisma.product.create({
             data: data,

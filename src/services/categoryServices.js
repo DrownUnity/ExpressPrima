@@ -3,13 +3,9 @@ const prisma = new PrismaClient();
 
 export default class CategoryService {
 
-    constructor(){
-    }
     async create(data) {
       return await prisma.category.create({
-        where:{
-          data: data
-        }
+        data: data
       })
     }
   

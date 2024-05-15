@@ -20,7 +20,8 @@ router.get('/', async (req, res, next) => {
     async (req, res, next) => {
       try {
         const { id } = req.params;
-        const category = await service.findOne(id);
+        const categoryId = parseInt(id)
+        const category = await service.findOne(categoryId);
         res.json(category);
       } catch (error) {
         next(error);
@@ -47,8 +48,9 @@ router.get('/', async (req, res, next) => {
     async (req, res, next) => {
       try {
         const { id } = req.params;
+        const categoryId = parseInt(id)
         const body = req.body;
-        const category = await service.update(id, body);
+        const category = await service.update(categoryId, body);
         res.json(category);
       } catch (error) {
         next(error);
@@ -61,7 +63,8 @@ router.get('/', async (req, res, next) => {
     async (req, res, next) => {
       try {
         const { id } = req.params;
-        await service.delete(id);
+        const categoryId = parseInt(id)
+        await service.delete(categoryId);
         res.status(201).json({id});
       } catch (error) {
         next(error);
