@@ -16,7 +16,10 @@ export default class ProductService {
     async findOne(id){
         return await prisma.product.findUnique({
             where: {
-                id: id
+                id: id,
+            },
+            include:{
+                category: true,
             }
         });
     }

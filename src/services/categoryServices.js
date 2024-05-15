@@ -10,7 +10,11 @@ export default class CategoryService {
     }
   
     async find() {
-      return await prisma.category.findMany();
+      return await prisma.category.findMany({
+        include: {
+          products: true,
+        }
+      });
     }
   
     async findOne(id) {
