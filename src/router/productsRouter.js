@@ -23,6 +23,13 @@ async (req, res, next) => {
     const { id } = req.params;
     const idNumber = parseInt(id)
     const product = await service.findOne(idNumber);
+
+    if(!product){
+      return res
+        .status(404)
+        .json({ error: `No product found with ID ${id}` });
+    }
+
     res.json(product);
   } catch (error) {
     next(error);
@@ -51,6 +58,13 @@ router.patch("/id",
       const idNumber = parseInt(id)
       const body = req.body;
       const product = await service.update(idNumber, body);
+
+      if(!product){
+        return res
+          .status(404)
+          .json({ error: `No product found with ID ${id}` });
+      }
+
       res.json(product)
     } catch (error) {
       next(error);
@@ -65,6 +79,13 @@ router.delete("/id",
       const { id } = req.params;
       const idNumber = parseInt(id)
       await service.delete(idNumber);
+
+      if(!idNumber){
+        return res
+          .status(404)
+          .json({ error: `No product found with ID ${id}` });
+      }
+      
       res.status.json({id})
     } catch (error) {
       next(error)

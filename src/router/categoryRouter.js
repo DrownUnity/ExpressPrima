@@ -22,6 +22,13 @@ router.get('/', async (req, res, next) => {
         const { id } = req.params;
         const categoryId = parseInt(id)
         const category = await service.findOne(categoryId);
+
+        if(!category){
+          return res
+            .status(404)
+            .json({ error: `No category found with ID ${categoryId}` });
+        }
+
         res.json(category);
       } catch (error) {
         next(error);
@@ -51,6 +58,13 @@ router.get('/', async (req, res, next) => {
         const categoryId = parseInt(id)
         const body = req.body;
         const category = await service.update(categoryId, body);
+
+        if(!category){
+          return res
+            .status(404)
+            .json({ error: `No category found with ID ${categoryId}` });
+        }
+
         res.json(category);
       } catch (error) {
         next(error);
@@ -65,6 +79,13 @@ router.get('/', async (req, res, next) => {
         const { id } = req.params;
         const categoryId = parseInt(id)
         await service.delete(categoryId);
+
+        if(!categoryId){
+          return res
+            .status(404)
+            .json({ error: `No category found with ID ${categoryId}` });
+        }
+
         res.status(201).json({id});
       } catch (error) {
         next(error);
