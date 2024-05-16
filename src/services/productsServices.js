@@ -5,7 +5,12 @@ export default class ProductService {
 
     async create(data) {
         return await prisma.product.create({
-            data: data,
+            data: {
+                name: data.name,
+                price: data.price,
+                category: { connect: { id: data.category } },
+                stock: data.stock
+            }
         })
     }
 
